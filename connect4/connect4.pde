@@ -25,6 +25,7 @@ void setup(){
   }
  }
 
+//initialize variables
 round =1;
   r1= 1;
   r2= 1;
@@ -41,6 +42,7 @@ round =1;
   yy=450;
   x=430;
   y=430;
+  //create background and game board
   noStroke();
   background(175,240,240);
   fill(130,60,30);
@@ -59,11 +61,13 @@ round =1;
 }
 
 void resetgame(){
+  //resets the game
   if(keyPressed){
     if(key == 'r' || key == 'R'){
       resetpressed = 1;
     }
   }
+  //initializes variables for after the game is reset
   if (resetpressed == 1){
     roundend=0;
     winner=0;
@@ -81,6 +85,7 @@ void resetgame(){
    yy=450;
    x=430;
    y=430;
+   //creates background and game board
   noStroke();
   background(175,240,240);
   fill(130,60,30);
@@ -199,6 +204,7 @@ void beginround(){
   fall=0;
   frameRate(10);
   
+//movement of the coin 
 if(keyPressed){
   if(key=='r' ||  key=='R'){
     resetpressed=1;
@@ -231,6 +237,7 @@ for(y=425;y<400;y+=50)
   }
 }
 
+//draws the coins
 void redcoin(){
   fill(190,5,5);
   ellipse(rx,ry,40,40);
@@ -243,12 +250,14 @@ void yellowcoin(){
 
 
 void draw(){
+  //creates border shepes
   fill(0,0,0);
   rect(0,0,375,height);
   rect(825,0,width,height);
   fill(0,10,200);
   rect(0,0,width,100);
   fill(255);
+  //creates scoreboard and instructions
   PFont k;
   k=createFont("Arial",200,true);
   textFont(k);
@@ -261,6 +270,7 @@ void draw(){
   fill(0);                       
   text("Control with arrow keys, Press 'R' to reset",415,550);
  
+ //winner is listed and score changes
   if (winner == 1 && roundend == 0)
  {
    roundend = 1;
@@ -285,6 +295,7 @@ void draw(){
     
  }
  
+ //allows coin to be placed in a column
  if (fall == 1){
          
        
@@ -385,6 +396,8 @@ void draw(){
   yellowcoin();
   if (fall == 1) redcoin();
  }
+ 
+ //keep coin from leaving the game area
  if(rx>800){
    rx=600;
  }
@@ -409,4 +422,4 @@ rect(375,650,450,150);
   //if(mousePressed && mouseX>375 && mouseX<825 && mouseY>650 && mouseY<800){
   
   //}  
-}
+}\
