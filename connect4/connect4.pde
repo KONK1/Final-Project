@@ -385,16 +385,28 @@ void draw(){
   yellowcoin();
   if (fall == 1) redcoin();
  }
+ if(rx>800){
+   rx=600;
+ }
+ if(yx>800){
+   yx=600;
+ }
+ if(rx<400){
+   rx=600;
+ }
+ if(yx<400){
+   yx=600;
+ }
   
 resetgame();
 check();
 
 fill(10,50,200);
-rect(470,675,250,100);
+rect(375,650,450,150);
 //textSize(20);
 //fill(0);
 //text("Return To Game Menu",65,255);
-  //if(mousePressed && mouseX>50 && mouseY<300 && mouseY>200 && mouseY<300){
+  //if(mousePressed && mouseX>375 && mouseX<825 && mouseY>650 && mouseY<800){
   
   //}  
 }
