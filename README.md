@@ -6,4 +6,4 @@ Duck Hunt is a single player game where the shooter attempts to target and shoot
 
 Air Hockey will be played by two players. The game will start off with a "click to start screen" when the game is selected from the menu. Scores will be dislayed on a scoreboard at the top of the screen.There are two paddles, one for each player. The top paddle will be controlled by the mouse and the bottom by the "A" and "S" keys. The ball will start at the middle of the screen and will move upon the pressing of the mouse. When the ball passes the paddle into the goal, the other player will receive a point. When a player reaches the score of seven, there will be a screen that displays "we have a winner!" Upon conclusion of the game, the player may return to the menu or play again.
 
-
+The final game is snake that will be played by one person. 
