@@ -1,6 +1,6 @@
-class SMT{
+class ST{
   
-  SMT(){
+  ST(){
     
   }
   
