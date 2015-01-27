@@ -1,4 +1,15 @@
-//declare image and other variables.Also initialize teh variables
+//to add the music 
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+Minim minim;
+AudioPlayer arcmusic;
+
+
+//declare image and other variables.Also initialize the variables for the game menu
 PImage bg;
 float r=255;
 float g=255;
@@ -61,8 +72,23 @@ int winner = 0;                                                                 
 int sr = 0;                                                                             ////
 int sy = 0;                                                                             ////
 ////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////AIR HOCKEY//////////////////////////////////
+int x1,y1,sz,speedY,speedX;                           ////
+int padY,padW,padH ,padX1, padY1,padW1, padH1, padX;////
+int scoreT=0;                                       ////
+int scoreB=0;                                       ////
+int running=0;                                      ////
+////////////////////////////////////////////////////////
+
+
 void setup() {
   size(1200, 800);
+  //music in the background
+   minim = new Minim(this);
+  arcmusic = minim.loadFile("Arcade.mp3");
+  arcmusic.loop();
+  
   //////////////SNAKE GAME//////////////////////
   //intialize the image                   ////
   bg = loadImage("game menu.jpg");        ////
@@ -93,10 +119,25 @@ void setup() {
   randh=width*2;                          ////
   i=50;                                   ////
   level=1; 
-  scope = new Scope();           ////
+  scope = new Scope();                    ////
   gamescreen = new Game();                ////
   menu = new Menu();                      ////
   //////////////////////////////////////////////
+ 
+ ////////////CONNECT FOUR///////////////////////
+ padX1=width/2-20;                          ////
+  padY1=height-50;                          ////
+  padW1=100;                                ////
+  padH1=10;                                 ////
+  padY=50;                                  ////
+  padW=100;                                 ////
+  padH=10;                                  ////
+  x1=width/2;                                ////
+  y1=height/2;                               ////
+  sz=20;                                    ////
+   speedY=-3;                               ////
+   speedX=3;                                ////
+////////////////////////////////////////////////
 }
 void draw() {
   noCursor();
@@ -127,7 +168,9 @@ void draw() {
     text("KONK1", width/2, 100);
     textSize(40);
     textAlign(CENTER);
-    text("Pick a Game", width/2, 150);
+    text("Right Click to pick a Game", width/2, 150);
+    textSize(20);
+    text("*AIR HOCKEY* press shift to go back to main menu after six points",width/2,height-60);
     //make the four boxes for the four games 
     rect(width/2-100, height-600, 200, 100);
     rect(width/2-100, height-475, 200, 100);
@@ -407,7 +450,93 @@ if (keyPressed && keyCode==SHIFT){
   frameRate(60);
 }
  }
+ //When box three is clicked on, game Air Hockey starts
+ if (mousePressed && (mouseButton==RIGHT) && mouseX>width/2-100 && mouseX<width/2+100 && mouseY>height-350 && mouseY<height-250){
+   game=3;
+ }
  
+ if (game==3){
+   running=1;
+ }
+ 
+  //Game End  
+  if (scoreB==7 || scoreT==7) {
+    running=2;
+     if (keyPressed && keyCode==SHIFT){
+      game=0;
+      stroke(1);
+      strokeWeight(1);
+    }
+  }
+ 
+  //game begins
+   if (running==1) {
+  background(255);
+  fill(0);
+  y1=y1+speedY;
+  x1=x1+speedX;
+    strokeWeight(random(2, 12));
+    stroke(random(64, 36), 97, random(99));
+    fill(random(179), 2, 2);
+  ellipse(x1,y1,sz,sz);
+ 
+ //reset the ball after score 
+  if (y1-sz/2<0){
+      x1=width/2;
+      y1=height/2;
+      speedY=2;
+      speedX=-2;
+  }
+  if (y1+sz/2>height){
+      x1=width/2;
+      y1=height/2;
+      speedY=-2;
+      speedX=2;
+   }
+  
+  padX=mouseX;
+    rect(padX, padY, padW, padH);
+    //bounce off of first paddle
+    if (y1-sz/2 <= padY+padH && x1+sz/2 <= padX+padW && x1+sz/2 >= padX) {
+      speedY= 5;
+    }
+    rect(padX1, padY1, padW1, padH1);
+//controls to move second paddle
+if (keyPressed && keyCode==LEFT) {
+      padX1=padX1-8;
+    }
+    if (keyPressed && keyCode==RIGHT) {
+      padX1=padX1+8;
+    }
+//bounce off of second paddle
+if (y1+sz/2 >= padY1 && x1+sz/2 <= padX1+padW1 && x1+sz/2 >= padX1){
+  speedY=-5;
+}
+
+//left side and right side 
+  if (x1-sz/2<0) {
+      speedX*=-1.5;
+    }
+    if (x1+sz/2>width) {
+      speedX*=-1.5;
+       
+    }
+
+// Pongball score board
+    fill(237, 69, 7);
+    textSize(50);
+    fill(0, 250, 185);
+    text(scoreB, width/2, 150);
+    fill(211, 0, 14);
+    text(scoreT, width/2, height-150);
+  if (y1-sz/2<=0) {
+      scoreT+=1;
+    }
+    if (y1+sz/2>=height) {
+      scoreB+=1;
+    }
+}
+
   //When box four is clicked on, game SNAKE begins
   if (mousePressed && (mouseButton==RIGHT) && mouseX>width/2-100 && mouseX<width/2+100 && mouseY>height-225 && mouseY<height-125) {
     game=4;
