@@ -21,10 +21,10 @@ class Reset {
       r5= 1;
       r6 = 1;
       r7 = 1;
-      ry=450;
+      ry=50;
       rx=600;
       yx=600;
-      yy=450;
+      yy=50;
       x=430;
       y=430;
       //creates background and game board

@@ -43,10 +43,10 @@ void setup() {
   r7 = 1;
   lx = 1;
   ly = 1;
-  ry=450;
+  ry=50;
   rx=600;
   yx=600;
-  yy=450;
+  yy=50;
   x=430;
   y=430;
   //create background and game board
